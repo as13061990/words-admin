@@ -3,20 +3,35 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { NavLink, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = (): React.JSX.Element => {
   return (
-    <Box sx={{ flexGrow: 1, marginBottom: '50px' }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Button color="inherit">
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Words admin
-            </Typography>
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <>
+
+      <Box sx={{ flexGrow: 1, marginBottom: '50px' }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Link to='/level' style={{textDecoration: 'none', marginRight: '80px'}}>
+              <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: 'white' }}>
+                Уровни
+              </Typography>
+            </Link>
+
+            <Link to='/bg'  style={{textDecoration: 'none'}}>
+              <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: 'white'}}>
+                Фоны
+              </Typography>
+            </Link>
+          </Toolbar>
+        </AppBar>
+      </Box>
+
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
 }
 

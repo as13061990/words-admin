@@ -1,5 +1,4 @@
 import { useEffect, useState, FC } from "react";
-import Header from "../components/UI/Header/Header";
 import { Container } from "@mui/material";
 import LevelsList from "../components/LevelsList/LevelsList";
 import AddForm from "../components/AddForm/AddForm";
@@ -9,7 +8,7 @@ import Grid from "../components/Grid/Grid";
 
 let id = 0
 
-const Main: FC = () => {
+const LevelMenu: FC = () => {
 
   const [addFormValue, setAddFormValue] = useState<IaddForm>({ level: 0, word: '', letter: '' });
   const [levelData, setLevelData] = useState<IlevelData>({ level: 0, words: [], letters: [] });
@@ -21,6 +20,8 @@ const Main: FC = () => {
 
   const fetchLevels = async () => {
     const res = await axiosInstance.get('/levels/list')
+    const res2 = await axiosInstance.get('/bg/list')
+    console.log(res2)
     setLevels(res.data.data)
   }
 
@@ -216,7 +217,6 @@ const Main: FC = () => {
 
   return (
     <>
-      <Header />
       <Container maxWidth={false} sx={{ padding: '0 60px', display: 'flex', gap: '70px' }}>
         <LevelsList levels={levels} deleteLevel={deleteLevel} turnOnEditMode={turnOnEditMode} />
         <AddForm
@@ -244,4 +244,4 @@ const Main: FC = () => {
   )
 };
 
-export default Main
+export default LevelMenu
