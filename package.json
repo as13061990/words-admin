@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Timkogas.github.io/words-admin/",
+  "homepage": "https://as13061990.github.io/words-admin/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

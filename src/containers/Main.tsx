@@ -20,8 +20,8 @@ const Main: FC = () => {
   const [currentLetter, setCurrentLetter] = useState<string>('')
 
   const fetchLevels = async () => {
-    const res = await axiosInstance.get('/getLevels')
-    setLevels(res.data)
+    const res = await axiosInstance.get('/levels/list')
+    setLevels(res.data.data)
   }
 
   useEffect(() => {
@@ -158,10 +158,10 @@ const Main: FC = () => {
       data = { data: JSON.stringify({ level: levelData.level, words: words, letters: letters }) }
     }
     if (editMode > -1) {
-      await axiosInstance.post('/editLevel', { ...data, id: editMode })
+      await axiosInstance.post('/levels/edit', { ...data, id: editMode })
       setEditMode(-1)
     } else {
-      await axiosInstance.post('/addLevel', data)
+      await axiosInstance.post('/levels/add', data)
     }
     setLevelData(() => {
       return {
@@ -177,7 +177,7 @@ const Main: FC = () => {
 
   const deleteLevel = async (id: number): Promise<void> => {
     const data = { id: id }
-    await axiosInstance.post('/deleteLevel', data)
+    await axiosInstance.post('/levels/delete', data)
     fetchLevels()
   }
 
