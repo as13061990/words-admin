@@ -41,7 +41,7 @@ const BgList: FC<IBgList> = ({ bgs, deleteBg, turnOnEditMode }) => {
                         variant="subtitle1"
                         color="text.primary"
                       >
-                       Предосмотр: <br/>
+                       Предпросмотр: <br/>
                        <img style={{width: '100px', height: '100px'}} src={bg.url}/>
                       </Typography>
                     </>

@@ -24,16 +24,20 @@ const BgMenu: FC = () => {
     await axiosInstance.post('/bg/delete', data)
     fetchBgs()
   }
-  console.log(bgs)
   const turnOnEditMode = (id: number): void => {
     setEditMode(id)
-    const findElement = bgs.find(el => el.id === id) as IlevelResponse
+    const findElement = bgs.find(el => el.id === id)
+    setBgData(findElement)
   }
 
   const postBg = async (): Promise<void> => {
-
     if (editMode > -1) {
-      await axiosInstance.post('/bg/edit', bgData)
+      const file = bgData;
+      const data = new FormData();
+      data.append('file', file, file.name);
+      data.append('id', editMode.toString());
+      await axiosInstance.post('/bg/edit', data).then(res => fetchBgs())
+      setBgs([])
       setEditMode(-1)
     } else {
       const file = bgData;
@@ -41,6 +45,7 @@ const BgMenu: FC = () => {
       data.append('file', file, file.name);
       await axiosInstance.post('/bg/add', data)
     }
+   
     setBgData(null)
     fetchBgs()
   }
@@ -51,9 +56,11 @@ const BgMenu: FC = () => {
   }
 
   const handleSelectedFile = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    console.log(e.target.files)
     if (!e.target.files) return;
     const file = e.target.files[0];
     setBgData(file);
+    e.target.value = ''
   }
 
   return (

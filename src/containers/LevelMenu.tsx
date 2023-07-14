@@ -20,8 +20,6 @@ const LevelMenu: FC = () => {
 
   const fetchLevels = async () => {
     const res = await axiosInstance.get('/levels/list')
-    const res2 = await axiosInstance.get('/bg/list')
-    console.log(res2)
     setLevels(res.data.data)
   }
 
@@ -29,7 +27,6 @@ const LevelMenu: FC = () => {
     fetchLevels()
   }, [])
 
-  console.log(levels)
 
   const onChangeAddForm = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target

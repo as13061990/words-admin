@@ -5,7 +5,7 @@ import './types/interfaces.ts'
 import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <BrowserRouter>
+  <BrowserRouter basename={window.location.pathname || ''}>
     <App />
   </BrowserRouter>,
 )
