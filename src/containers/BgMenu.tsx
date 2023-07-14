@@ -36,7 +36,7 @@ const BgMenu: FC = () => {
       const data = new FormData();
       data.append('file', file, file.name);
       data.append('id', editMode.toString());
-      await axiosInstance.post('/bg/edit', data).then(res => fetchBgs())
+      await axiosInstance.post('/bg/edit', data)
       setBgs([])
       setEditMode(-1)
     } else {
@@ -56,7 +56,6 @@ const BgMenu: FC = () => {
   }
 
   const handleSelectedFile = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(e.target.files)
     if (!e.target.files) return;
     const file = e.target.files[0];
     setBgData(file);

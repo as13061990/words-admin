@@ -8,19 +8,25 @@ import { Link } from 'react-router-dom';
 const Header = (): React.JSX.Element => {
   return (
     <>
-  
+
       <Box sx={{ flexGrow: 1, marginBottom: '50px' }}>
         <AppBar position="static">
           <Toolbar>
-            <Link to='/level' style={{textDecoration: 'none', marginRight: '80px'}}>
+            <Link to='/level' style={{ textDecoration: 'none', marginRight: '80px' }}>
               <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: 'white' }}>
                 Уровни
               </Typography>
             </Link>
 
-            <Link to='/bg'  style={{textDecoration: 'none'}}>
-              <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: 'white'}}>
+            <Link to='/bg' style={{ textDecoration: 'none', marginRight: '80px' }}>
+              <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: 'white' }}>
                 Фоны
+              </Typography>
+            </Link>
+
+            <Link to='/meta' style={{ textDecoration: 'none' }}>
+              <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: 'white' }}>
+                Мета
               </Typography>
             </Link>
           </Toolbar>

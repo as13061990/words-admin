@@ -2,37 +2,42 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import React, { FC } from 'react'
 
 
-interface IBgList {
-  bgs: any[]
-  deleteBg: (id: number) => Promise<void>
-  turnOnEditMode: (id: number) => void
+interface IMetaList {
+  chapters: Ichapter[]
+  deleteChapter: (id: number) => Promise<void>
+  setChapterData: React.Dispatch<React.SetStateAction<Ichapter>>
+  upChapter: (i: number) => void
+  downChapter: (i: number) => void
 }
 
+const MetaList: FC<IMetaList> = ({ chapters, deleteChapter, setChapterData, upChapter, downChapter }) => {
 
-const BgList: FC<IBgList> = ({ bgs, deleteBg, turnOnEditMode }) => {
   return (
-    <Box sx={{ flexBasis: '50%' }}>
+    <Box sx={{ flexBasis: '40%' }}>
       <Typography
         sx={{ display: 'inline' }}
         component="span"
         variant="h3"
         textAlign='center'
       >
-        Фоны
+        Главы
+        <Button sx={{ marginLeft: '30px' }}>
+          Сохранить
+        </Button>
       </Typography>
       <List sx={{ width: '100%', overflowY: 'scroll', height: '80vh', border: '3px solid black', borderRadius: '5px', padding: '15px' }}>
-        {bgs.map((bg, i) => {
+        {chapters.map((chapter, i) => {
           return (
-            <React.Fragment key={bg.id}>
+            <React.Fragment key={chapter.id}>
               <ListItem alignItems="flex-start" sx={{ border: '1px solid black', borderRadius: '15px' }}>
                 <ListItemText
-                  primary={`Фон ${i} id-${bg.id}`}
+                  primary={`Айди меты: ${chapter.id}`}
                   secondary={
                     <>
                       <Typography
@@ -41,16 +46,22 @@ const BgList: FC<IBgList> = ({ bgs, deleteBg, turnOnEditMode }) => {
                         variant="subtitle1"
                         color="text.primary"
                       >
-                       Предпросмотр: <br/>
-                       <img style={{width: '100px', height: '100px'}} src={bg.url}/>
+                        Города: {chapter.data.map((city, i: number) => i + 1 === city.levels.length ? `${city.name}` : `${city.name}, `)}
                       </Typography>
+                      <br />
+                      <Button sx={{ fontSize: '14px', marginRight: '10px', padding: 0 }} onClick={() => upChapter(i)}>
+                        Верх
+                      </Button>
+                      <Button sx={{ fontSize: '14px', marginRight: '10px', padding: 0, color: 'red' }} onClick={() => downChapter(i)}>
+                        Вниз
+                      </Button>
                     </>
                   }
                 />
-                <IconButton aria-label="edit" onClick={() => { turnOnEditMode(bg.id) }}>
+                <IconButton aria-label="edit" onClick={() => { setChapterData(chapter) }}>
                   <EditIcon />
                 </IconButton>
-                <IconButton aria-label="delete" onClick={() => { deleteBg(bg.id) }}>
+                <IconButton aria-label="delete" onClick={() => { deleteChapter(chapter.id) }}>
                   <DeleteIcon />
                 </IconButton>
               </ListItem>
@@ -62,4 +73,4 @@ const BgList: FC<IBgList> = ({ bgs, deleteBg, turnOnEditMode }) => {
     </Box>);
 }
 
-export default BgList
+export default MetaList

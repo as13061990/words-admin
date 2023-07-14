@@ -19,11 +19,21 @@ interface IlevelData {
   level: number
   words: Iword[]
   letters: Iletter[]
-  config?: ((number|string)[])[]
+  config?: ((number | string)[])[]
 }
 
-interface IlevelResponse{
+interface IlevelResponse {
   id: number
   data: string
 }
 
+interface Icity {
+  name: string
+  bg: { id: number }
+  levels: { id: number }[]
+}
+
+interface Ichapter {
+ id: number
+ data: Icity[]
+}

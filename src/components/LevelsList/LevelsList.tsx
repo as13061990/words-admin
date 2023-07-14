@@ -31,7 +31,7 @@ const LevelsList: FC<IAddFormProps> = ({ levels, deleteLevel, turnOnEditMode }) 
           const data = JSON.parse(level.data)
           const words = data.words.map((word: string) => word.toLowerCase())
           const letters = data.letters.map((letter: string) => letter.toUpperCase())
-          const levelString = `Уровень ${data.level}`
+          const levelString = `Уровень ${data.level} id-${data.id}`
           return (
             <React.Fragment key={level.id}>
               <ListItem  alignItems="flex-start" sx={{ border: '1px solid black', borderRadius: '15px' }}>
